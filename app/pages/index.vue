@@ -1,6 +1,7 @@
 <template>
-  <div class="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex flex-col items-center py-12">
-    <UCard class="w-full max-w-2xl shadow-xl border-0">
+  <div class="relative min-h-screen flex flex-col items-center py-12">
+    <div class="animated-gradient-bg" />
+    <UCard class="w-full max-w-2xl glass-card shadow-xl border-0">
       <div class="flex flex-col gap-4 items-center">
         <img src="https://github.com/google-gemini.png" alt="Gemini Logo" class="w-20 h-20 rounded-full shadow mb-2">
         <h1 class="text-3xl font-bold text-indigo-700">Gemini 编程助手</h1>
@@ -9,7 +10,7 @@
         </p>
       </div>
       <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
-        <UCard class="bg-white/80">
+        <UCard class="bg-white/60 glass-card">
           <template #header>
             <div class="flex items-center gap-2">
               <UIcon name="i-lucide-terminal" class="text-indigo-500" />
@@ -25,7 +26,7 @@
             <li>内置 Google Search grounding 工具</li>
           </ul>
         </UCard>
-        <UCard class="bg-white/80">
+        <UCard class="bg-white/60 glass-card">
           <template #header>
             <div class="flex items-center gap-2">
               <UIcon name="i-lucide-rocket" class="text-indigo-500" />
@@ -48,7 +49,7 @@
         </UCard>
       </div>
       <div class="mt-8">
-        <UCard class="bg-white/80">
+        <UCard class="bg-white/60 glass-card">
           <template #header>
             <div class="flex items-center gap-2">
               <UIcon name="i-lucide-lightbulb" class="text-indigo-500" />

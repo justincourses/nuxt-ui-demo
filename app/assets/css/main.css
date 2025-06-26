@@ -16,3 +16,31 @@
   --color-green-900: #0a5331;
   --color-green-950: #052e16;
 }
+
+/* 动态流动渐变背景动画 */
+.animated-gradient-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(270deg, #a5b4fc, #f0abfc, #f9fafb, #818cf8, #f472b6, #a5b4fc);
+  background-size: 400% 400%;
+  animation: gradientFlow 16s ease-in-out infinite;
+}
+
+@keyframes gradientFlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* 毛玻璃卡片效果 */
+.glass-card {
+  background: rgba(255, 255, 255, 0.35);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.18);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border-radius: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
