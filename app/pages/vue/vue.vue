@@ -1,5 +1,7 @@
 <script setup lang="ts">
-import HelloWorld from '~/components/HelloWorld.vue'
+definePageMeta({
+  layout: 'vue'
+})
 </script>
 
 <template>
@@ -11,7 +13,6 @@ import HelloWorld from '~/components/HelloWorld.vue'
       <img src="/assets/vue.svg" class="logo vue" alt="Vue logo">
     </a>
   </div>
-  <HelloWorld msg="Hello World" />
 </template>
 
 <style scoped>

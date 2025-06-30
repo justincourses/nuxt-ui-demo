@@ -1,3 +1,5 @@
 <template>
-  <slot />
+  <div class="main-container layout-default">
+    <slot />
+  </div>
 </template>
