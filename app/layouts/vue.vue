@@ -12,5 +12,6 @@
     <VueSlider />
     <VueTable />
     <VueCal />
+    <HelloWorld msg="Hello World" />
   </div>
 </template>
