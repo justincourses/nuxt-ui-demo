@@ -13,10 +13,15 @@ const list = ref([
 const func = (item) => {
   alert(JSON.stringify(item))
 }
+
+const pictures = list.value.filter(item => item.src).map(item => item.src)
 </script>
 
 <template>
   <div>
+    <UCarousel v-slot="{ item }" :items="pictures" :ui="{ item: 'basis-1/3' }">
+      <img :src="item" width="234" height="234" class="rounded-lg">
+    </UCarousel>
     <VueWorldHello v-for="item in list" :key="item.id" :item="item" @showitem="func" />
     <div v-for="(item, index) in Array.from({ length: 5 })" :key="index">Vue Page - {{ index }}</div>
     <VueNuxtUiHello />
