@@ -5,13 +5,23 @@ import { Button } from '~/components/ui/button'
 defineProps<{ msg: string }>()
 
 const count = ref(0)
+
+const reset = () => {
+  count.value = 0
+}
+
+const setValue = (event: Event) => {
+  count.value = Number((event.target as HTMLInputElement).value)
+}
 </script>
 
 <template>
   <h1>HelloWorld {{ msg }}</h1>
 
   <div class="card">
-    <Button variant="destructive" @click="count++">count is {{ count }}</Button>
+    <Button variant="destructive" @click="reset">count is {{ count }}</Button>
+
+    <input :value="count" type="text" @input="setValue">
   </div>
   <p>
     Learn more about IDE Support for Vue in the
