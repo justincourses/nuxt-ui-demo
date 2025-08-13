@@ -12,6 +12,7 @@ const name = ref('')
 const rsp = ref<ApiResponse | null>(null)
 const isLoading = ref(false)
 const hasRequested = ref(false)
+const thursdayEnabled = ref(false)
 
 const fetchData = async () => {
   if (!name.value.trim()) {
@@ -22,8 +23,9 @@ const fetchData = async () => {
   hasRequested.value = false
 
   try {
+    const queryParam = thursdayEnabled.value ? '?thursday=on' : '?thursday=off'
     rsp.value = await $fetch(
-      '/api/hello/' + name.value + '?a=1',
+      '/api/hello/' + name.value + queryParam,
       {
         method: 'post',
         body: { test: 123 }
@@ -59,6 +61,37 @@ const fetchData = async () => {
             size="lg"
             @keydown.enter="fetchData"
           />
+        </UFormGroup>
+
+        <UFormGroup label="Thursday 参数设置" name="thursday">
+          <div class="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
+            <div class="flex items-center gap-2">
+              <UIcon name="i-lucide-calendar" class="text-gray-600 dark:text-gray-400" />
+              <span class="text-sm font-medium text-gray-700 dark:text-gray-300">
+                Thursday 模式
+              </span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="text-xs text-gray-500 dark:text-gray-400">
+                {{ thursdayEnabled ? 'ON' : 'OFF' }}
+              </span>
+              <button
+                :class="[
+                  'relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2',
+                  thursdayEnabled ? 'bg-primary-600' : 'bg-gray-200 dark:bg-gray-700'
+                ]"
+                @click="thursdayEnabled = !thursdayEnabled"
+              >
+              >
+                <span
+                  :class="[
+                    'inline-block h-4 w-4 transform rounded-full bg-white transition-transform',
+                    thursdayEnabled ? 'translate-x-6' : 'translate-x-1'
+                  ]"
+                />
+              </button>
+            </div>
+          </div>
         </UFormGroup>
 
         <UButton
