@@ -22,7 +22,13 @@ const fetchData = async () => {
   hasRequested.value = false
 
   try {
-    rsp.value = await $fetch('/api/hello/' + name.value)
+    rsp.value = await $fetch(
+      '/api/hello/' + name.value + '?a=1',
+      {
+        method: 'post',
+        body: { test: 123 }
+      }
+    )
     hasRequested.value = true
   } catch (error) {
     console.error('API 请求失败:', error)
