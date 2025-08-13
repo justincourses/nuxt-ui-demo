@@ -75,21 +75,7 @@ const fetchData = async () => {
               <span class="text-xs text-gray-500 dark:text-gray-400">
                 {{ thursdayEnabled ? 'ON' : 'OFF' }}
               </span>
-              <button
-                :class="[
-                  'relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2',
-                  thursdayEnabled ? 'bg-primary-600' : 'bg-gray-200 dark:bg-gray-700'
-                ]"
-                @click="thursdayEnabled = !thursdayEnabled"
-              >
-              >
-                <span
-                  :class="[
-                    'inline-block h-4 w-4 transform rounded-full bg-white transition-transform',
-                    thursdayEnabled ? 'translate-x-6' : 'translate-x-1'
-                  ]"
-                />
-              </button>
+              <USwitch v-model="thursdayEnabled" />
             </div>
           </div>
         </UFormGroup>
