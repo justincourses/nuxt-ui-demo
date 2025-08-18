@@ -80,9 +80,11 @@ const fetchWeatherData = async () => {
   errorMessage.value = ''
 
   try {
-    const apiUrl = `http://api.weatherstack.com/current?access_key=aa1149bcdaa84a1b9e55d4cd8084a93d&query=${encodeURIComponent(city.value)}`
-
-    weatherData.value = await $fetch(apiUrl)
+    weatherData.value = await $fetch('/api/weather', {
+      query: {
+        query: city.value
+      }
+    })
     hasRequested.value = true
   } catch (error) {
     console.error('天气API请求失败:', error)
@@ -139,7 +141,7 @@ onMounted(() => {
     <!-- 错误提示 -->
     <UAlert
       v-if="errorMessage"
-      color="red"
+      color="error"
       variant="soft"
       :description="errorMessage"
       :close-button="{ variant: 'link', color: 'gray', size: 'xs' }"
