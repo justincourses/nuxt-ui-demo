@@ -50,9 +50,8 @@ API_KEY=your-openrouter-api-key
 ## 支持的模型
 
 - `openai/gpt-oss-20b:free` - GPT OSS 20B (免费)
-- `openai/gpt-oss-120b:free` - GPT OSS 120B (免费)
-- `openai/gpt-3.5-turbo` - GPT-3.5 Turbo
-- `openai/gpt-4` - GPT-4
+- `deepseek/deepseek-chat-v3-0324:free` - DeepSeek Chat V3 (免费)
+- `deepseek/deepseek-r1-0528:free` - DeepSeek R1 (免费)
 
 ## 测试页面
 
