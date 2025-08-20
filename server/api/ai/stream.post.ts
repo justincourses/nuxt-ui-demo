@@ -14,9 +14,6 @@ export default defineEventHandler(async (event) => {
   const apiUrl = config.apiUrl || 'https://openrouter.ai/api/v1'
   const apiKey = config.apiKey
 
-  console.log('Runtime config - apiUrl:', apiUrl)
-  console.log('Runtime config - apiKey exists:', !!apiKey)
-
   if (!apiKey) {
     throw createError({
       statusCode: 500,
@@ -39,9 +36,8 @@ export default defineEventHandler(async (event) => {
       temperature: body.temperature,
       max_tokens: body.max_tokens,
       top_p: body.top_p,
+      stream: true
     }
-
-    console.log('Request body:', JSON.stringify(requestBody, null, 2))
 
     // 调用 OpenRouter API
     const response = await fetch(`${apiUrl}/chat/completions`, {
@@ -53,45 +49,25 @@ export default defineEventHandler(async (event) => {
       body: JSON.stringify(requestBody)
     })
 
-    console.log('Response status:', response.status)
-    console.log('Response headers:', Object.fromEntries(response.headers.entries()))
-
     if (!response.ok) {
       const errorText = await response.text()
-      console.error('API Error Response:', errorText)
       throw createError({
         statusCode: response.status,
         statusMessage: `API Error: ${response.statusText} - ${errorText}`
       })
     }
 
-    const result = await response.json()
-    console.log('API Response:', result)
-
-    return result
+    // 返回流式响应
+    return response.body
   } catch (error: unknown) {
-    console.error('AI API request failed:', error)
-
-    // 记录更详细的错误信息
-    if (error instanceof Error) {
-      console.error('Error message:', error.message)
-      console.error('Error stack:', error.stack)
-    }
+    console.error('AI Stream API request failed:', error)
 
     // 处理不同类型的错误
-    const httpError = error as { statusCode?: number; statusMessage?: string; message?: string }
+    const httpError = error as { statusCode?: number; statusMessage?: string }
     if (httpError.statusCode) {
       throw createError({
         statusCode: httpError.statusCode,
-        statusMessage: httpError.statusMessage || httpError.message || 'AI API request failed'
-      })
-    }
-
-    // 如果是 Error 实例，使用其 message
-    if (error instanceof Error) {
-      throw createError({
-        statusCode: 500,
-        statusMessage: `AI API Error: ${error.message}`
+        statusMessage: httpError.statusMessage || 'AI API request failed'
       })
     }
 
